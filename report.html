@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Monthly Expense Report</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #f5f7fa; color: #1a1a1a; padding: 2rem;
+    max-width: 1000px; margin: 0 auto; line-height: 1.5;
+  }
+  header {
+    text-align: center; margin-bottom: 1.5rem; padding: 2rem;
+    background: white; border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  header h1 { font-size: 2rem; color: #16a34a; margin-bottom: 0.5rem; }
+  header .period { color: #666; font-size: 1rem; }
+  .cards {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1rem; margin-bottom: 1.5rem;
+  }
+  .card {
+    background: white; padding: 1.5rem; border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-align: center;
+  }
+  .card .label {
+    font-size: 0.8rem; color: #888; text-transform: uppercase;
+    letter-spacing: 0.05em; margin-bottom: 0.5rem;
+  }
+  .card .value { font-size: 1.75rem; font-weight: 700; }
+  .card.income .value { color: #16a34a; }
+  .card.spending .value { color: #dc2626; }
+  .card.net.positive .value { color: #16a34a; }
+  .card.net.negative .value { color: #dc2626; }
+  section {
+    background: white; padding: 1.5rem; border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 1.5rem;
+  }
+  section h2 {
+    font-size: 1.1rem; color: #1a1a1a; margin-bottom: 1rem;
+    padding-bottom: 0.5rem; border-bottom: 2px solid #f0f0f0;
+  }
+  .bar-row {
+    display: grid; grid-template-columns: 160px 1fr 140px;
+    align-items: center; gap: 1rem; padding: 0.5rem 0;
+  }
+  .cat-label { font-weight: 500; font-size: 0.9rem; }
+  .bar-container {
+    background: #f0f0f0; border-radius: 4px; height: 24px; overflow: hidden;
+  }
+  .bar {
+    background: linear-gradient(90deg, #16a34a, #22c55e);
+    height: 100%; border-radius: 4px;
+    animation: grow 0.6s ease-out;
+  }
+  @keyframes grow { from { width: 0; } }
+  .amount { text-align: right; font-family: monospace; font-size: 0.9rem; color: #333; }
+  .pct { color: #999; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid #f0f0f0; }
+  th { font-size: 0.8rem; color: #888; text-transform: uppercase; letter-spacing: 0.05em; }
+  td:last-child, th:last-child { text-align: right; font-family: monospace; }
+  footer { text-align: center; color: #999; font-size: 0.85rem; margin-top: 2rem; }
+</style>
+</head>
+<body>
+  <header>
+    <h1>🟢 Monthly Expense Report</h1>
+    <p class="period">Jan 02 – Jan 31, 2026 · 40 transactions · 9 categories</p>
+  </header>
+
+  <div class="cards">
+    <div class="card income">
+      <div class="label">Income</div>
+      <div class="value">৳107,000</div>
+    </div>
+    <div class="card spending">
+      <div class="label">Spending</div>
+      <div class="value">৳33,817</div>
+    </div>
+    <div class="card net positive">
+      <div class="label">Net Change</div>
+      <div class="value">+৳73,183</div>
+    </div>
+  </div>
+
+  <section>
+    <h2>Spending by Category</h2>
+    
+        <div class="bar-row">
+          <div class="cat-label">Other</div>
+          <div class="bar-container"><div class="bar" style="width:100.0%"></div></div>
+          <div class="amount">৳8,690 <span class="pct">(26%)</span></div>
+        </div>
+        <div class="bar-row">
+          <div class="cat-label">Groceries</div>
+          <div class="bar-container"><div class="bar" style="width:85.5%"></div></div>
+          <div class="amount">৳7,432 <span class="pct">(22%)</span></div>
+        </div>
+        <div class="bar-row">
+          <div class="cat-label">Bills & Utilities</div>
+          <div class="bar-container"><div class="bar" style="width:65.6%"></div></div>
+          <div class="amount">৳5,700 <span class="pct">(17%)</span></div>
+        </div>
+        <div class="bar-row">
+          <div class="cat-label">Healthcare</div>
+          <div class="bar-container"><div class="bar" style="width:49.5%"></div></div>
+          <div class="amount">৳4,300 <span class="pct">(13%)</span></div>
+        </div>
+        <div class="bar-row">
+          <div class="cat-label">Entertainment</div>
+          <div class="bar-container"><div class="bar" style="width:42.2%"></div></div>
+          <div class="amount">৳3,670 <span class="pct">(11%)</span></div>
+        </div>
+        <div class="bar-row">
+          <div class="cat-label">Food & Dining</div>
+          <div class="bar-container"><div class="bar" style="width:34.6%"></div></div>
+          <div class="amount">৳3,006 <span class="pct">(9%)</span></div>
+        </div>
+        <div class="bar-row">
+          <div class="cat-label">Transport</div>
+          <div class="bar-container"><div class="bar" style="width:11.5%"></div></div>
+          <div class="amount">৳1,004 <span class="pct">(3%)</span></div>
+        </div>
+        <div class="bar-row">
+          <div class="cat-label">Shopping</div>
+          <div class="bar-container"><div class="bar" style="width:0.2%"></div></div>
+          <div class="amount">৳16 <span class="pct">(0%)</span></div>
+        </div>
+  </section>
+
+  <section>
+    <h2>Top 5 Merchants</h2>
+    <table>
+      <thead><tr><th>Merchant</th><th>Amount</th></tr></thead>
+      <tbody>
+        <tr><td>Agora Supermarket</td><td>৳4,230.75</td></tr>
+        <tr><td>Meena Bazar Groceries</td><td>৳3,200.75</td></tr>
+        <tr><td>Gym Membership</td><td>৳2,500.00</td></tr>
+        <tr><td>Netflix Subscription</td><td>৳2,200.00</td></tr>
+        <tr><td>Phone Repair</td><td>৳2,200.00</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <footer>Built with Python · Local AI via Ollama · Data Operations Analyst series</footer>
+</body>
+</html>
