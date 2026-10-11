@@ -68,4 +68,13 @@ print(pd.read_sql("SELECT * FROM transactions LIMIT 5", conn))
 
 ## Chapter 5 — coming next
 
-We'll install Ollama, pull a small model, and use it to categorize each transaction. Stay tuned.
+We'll install Ollama, pull a small model, and use it to categorize each transaction. 
+
+pip install pandas ollama
+Go to ollama.com/download and install it for your OS.
+
+After it's installed, open a terminal and run:
+
+ollama pull llama3.2:3b
+
+Then final run : python main.py
