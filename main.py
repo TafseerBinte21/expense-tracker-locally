@@ -132,17 +132,31 @@ def load_to_db(df):
 # STEP 4 — CATEGORIZE (using local AI via Ollama)
 # ==================================================================
 def categorize_one(description: str) -> str:
-    """Ask the AI to pick one category for a single transaction."""
-    prompt = f"""You are a personal finance categorizer.
+    """Ask the AI to pick one category for a single transaction.
 
-Categorize this bank transaction into EXACTLY ONE of these categories:
-{', '.join(CATEGORIES)}
+    v2 prompt: we now describe each category with concrete examples of local
+    merchants (bKash, DESCO, Agora, etc.) so the model can anchor abstract
+    categories to real places. This is prompt engineering — iterating on
+    instructions is just as important as iterating on the code.
+    """
+    prompt = f"""You are a personal finance categorizer for someone in Bangladesh.
+
+Here are the categories, with examples of what belongs in each:
+- Food & Dining: restaurants, cafes, food delivery (Pathao Food, Foodpanda), tea stalls, KFC, Pizza Hut, Star Kabab, Starbucks, popcorn, snacks
+- Groceries: supermarkets like Agora, Meena Bazar, Shwapno, Chaldal
+- Transport: Uber, Pathao rides, CNG, bus fare, airport trips
+- Bills & Utilities: electricity (DESCO, DPDC), internet (Link3), mobile recharge (Grameenphone, Robi, Banglalink), gas bills
+- Entertainment: Netflix, Spotify, cinema tickets, Star Cineplex, concerts
+- Shopping: Amazon, Daraz, bookstores, phone repair, electronics, gifts, clothing
+- Healthcare: medical, lab tests, hospital, pharmacy, doctor fees
+- Personal Care: gym, salon, haircut, spa, beauty products
+- Income: salary, bonus, freelance payment, Upwork, refund
+- Transfer: bKash, Nagad, Rocket, mobile money sent to friends or between accounts
+- Other: only if it genuinely doesn't fit any category above
 
 Transaction: "{description}"
 
-Rules:
-- Respond with ONLY the category name, exactly as spelled above.
-- No explanation, no punctuation, no extra words.
+Respond with ONLY the category name, exactly as spelled above. No explanation, no punctuation, no extra words.
 """
     response = ollama.chat(
         model=MODEL,
@@ -263,7 +277,7 @@ def generate_html_report(df):
         <div class="bar-row">
           <div class="cat-label">{cat}</div>
           <div class="bar-container"><div class="bar" style="width:{width:.1f}%"></div></div>
-          <div class="amount">৳{row["sum"]:,.0f} <span class="pct">({pct:.0f}%)</span></div>
+          <div class="amount">৳{row["sum"]:,.0f} <span class="pct">({pct:.1f}%)</span></div>
         </div>"""
 
     merchants_html = ""
